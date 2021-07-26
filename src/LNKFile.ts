@@ -57,52 +57,71 @@ export class LNKFile {
     var decoder = new TextDecoder("utf-16le");
     this.StringData = {};
     if (this.ShellLinkHeader.LinkFlags.HasName) {
-      var NameSize = data.getUint16(pointer, true);
-      let len = NameSize * 2;
-      this.StringData.NAME_STRING = decoder.decode(
-        data.buffer.slice(pointer + 2, pointer + 2 + len)
-      );
+      let countCharacters = data.getUint16(pointer, true);
+      let len = countCharacters * 2;
+      this.StringData.NAME_STRING = {
+        countCharacters,
+        string: decoder.decode(
+          data.buffer.slice(pointer + 2, pointer + 2 + len)
+        ),
+      };
       pointer += len + 2;
     }
     if (this.ShellLinkHeader.LinkFlags.HasRelativePath) {
-      var RelativePathSize = data.getUint16(pointer, true);
-      let len = RelativePathSize * 2;
-      this.StringData.RELATIVE_PATH = decoder.decode(
-        data.buffer.slice(pointer + 2, pointer + 2 + len)
-      );
+      let countCharacters = data.getUint16(pointer, true);
+      let len = countCharacters * 2;
+      this.StringData.RELATIVE_PATH = {
+        countCharacters,
+        string: decoder.decode(
+          data.buffer.slice(pointer + 2, pointer + 2 + len)
+        ),
+      };
       pointer += len + 2;
     }
     if (this.ShellLinkHeader.LinkFlags.HasWorkingDir) {
-      var WorkingDirSize = data.getUint16(pointer, true);
-      let len = WorkingDirSize * 2;
-      this.StringData.WORKING_DIR = decoder.decode(
-        data.buffer.slice(pointer + 2, pointer + 2 + len)
-      );
+      let countCharacters = data.getUint16(pointer, true);
+      let len = countCharacters * 2;
+      this.StringData.WORKING_DIR = {
+        countCharacters,
+        string: decoder.decode(
+          data.buffer.slice(pointer + 2, pointer + 2 + len)
+        ),
+      };
       pointer += len + 2;
     }
     if (this.ShellLinkHeader.LinkFlags.HasArguments) {
-      var ArgumentsSize = data.getUint16(pointer, true);
-      let len = ArgumentsSize * 2;
-      this.StringData.COMAND_LINE_ARGUMENTS = decoder.decode(
-        data.buffer.slice(pointer + 2, pointer + 2 + len)
-      );
+      var countCharacters = data.getUint16(pointer, true);
+      let len = countCharacters * 2;
+      this.StringData.COMAND_LINE_ARGUMENTS = {
+        countCharacters,
+        string: decoder.decode(
+          data.buffer.slice(pointer + 2, pointer + 2 + len)
+        ),
+      };
       pointer += len + 2;
     }
     if (this.ShellLinkHeader.LinkFlags.HasIconLocation) {
-      var IconLocationSize = data.getUint16(pointer, true);
-      let len = IconLocationSize * 2;
-      this.StringData.ICON_LOCATION = decoder.decode(
-        data.buffer.slice(pointer + 2, pointer + 2 + len)
-      );
+      let countCharacters = data.getUint16(pointer, true);
+      let len = countCharacters * 2;
+      this.StringData.ICON_LOCATION = {
+        countCharacters,
+        string: decoder.decode(
+          data.buffer.slice(pointer + 2, pointer + 2 + len)
+        ),
+      };
       pointer += len + 2;
     }
   }
 }
 
 export interface StringData {
-  NAME_STRING?: string;
-  RELATIVE_PATH?: string;
-  WORKING_DIR?: string;
-  COMAND_LINE_ARGUMENTS?: string;
-  ICON_LOCATION?: string;
+  NAME_STRING?: StringStruct;
+  RELATIVE_PATH?: StringStruct;
+  WORKING_DIR?: StringStruct;
+  COMAND_LINE_ARGUMENTS?: StringStruct;
+  ICON_LOCATION?: StringStruct;
+}
+export interface StringStruct {
+  countCharacters: number;
+  string: string;
 }

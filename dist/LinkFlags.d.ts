@@ -1,0 +1,34 @@
+export declare class LinkFlags {
+    private flags;
+    constructor(flags?: number);
+    get HasLinkTargetIDList(): boolean;
+    get HasLinkInfo(): boolean;
+    get HasName(): boolean;
+    get HasRelativePath(): boolean;
+    get HasWorkingDir(): boolean;
+    get HasArguments(): boolean;
+    get HasIconLocation(): boolean;
+    get IsUnicode(): boolean;
+    get ForceNoLinkInfo(): boolean;
+    get HasExpString(): boolean;
+    get RunInSeparateProcess(): boolean;
+    get Unused1(): boolean;
+    get HasDarwinID(): boolean;
+    get RunAsUser(): boolean;
+    get HasExpIcon(): boolean;
+    get NoPidlAlias(): boolean;
+    get Unused2(): boolean;
+    get RunWithShimLayer(): boolean;
+    get ForceNoLinkTrack(): boolean;
+    get EnableTargetMetadata(): boolean;
+    get DisableLinkPathTracking(): boolean;
+    get DisableKnownFolderTracking(): boolean;
+    get DisableKnownFolderAlias(): boolean;
+    get AllowLinkToLink(): boolean;
+    get UnaliasOnSave(): boolean;
+    get PreferEnvironmentPath(): boolean;
+    get KeepLocalIDListForUNCTarget(): boolean;
+    toJSON(): any;
+    toString(): string;
+    valueOf(): number;
+}
